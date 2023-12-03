@@ -10,7 +10,7 @@ app.use(parserMiddleware)
 
 
 app.get('/', (req: Request, res: Response) => {
-  res.send('Hello Samurai')
+  res.send('Hello Samurai!!')
 })
 
 app.use('/products', productsRouter)

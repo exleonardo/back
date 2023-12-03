@@ -8,7 +8,7 @@ export type ProductType = {
 }
 
 // Connection URL
-const url = process.env.MONGO_URL
+const url = process.env.MONGO_URL||'mongodb+srv://admin:admin@cluster0.2wclziu.mongodb.net/shop-dev?retryWrites=true&w=majority';
 console.log('url :', url)
 if (!url) {
   throw new Error('❗ Url doesn\'t found')
