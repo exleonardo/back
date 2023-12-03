@@ -1,18 +1,26 @@
-import express,{Request,Response} from 'express'
-import bodyParser from 'body-parser'
-import cors from 'cors'
+import express, { Request, Response } from 'express'
+import { productsRouter } from './routers/products-router';
+import { runDb } from './repositories/db';
+
 const app = express()
-const port = 3000
+const port = process.env.PORT || 5000
 
-const corsMiddleware = cors()
-app.use(corsMiddleware)
+const parserMiddleware = express.json()
+app.use(parserMiddleware)
 
-app.get('/', (req:Request, res:Response) => {
-  let helloMessaage = 'Hello Wor111!!'
-  res.send(helloMessaage)
+
+app.get('/', (req: Request, res: Response) => {
+  res.send('Hello Samurai')
 })
-app.post('/todo',(req:Request, res:Response)=>{})
 
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+app.use('/products', productsRouter)
+
+
+const startApp = async () => {
+  await runDb()
+  app.listen(port, () => {
+    console.log(`Example app listening on port ${port}`)
+  })
+}
+
+startApp()
